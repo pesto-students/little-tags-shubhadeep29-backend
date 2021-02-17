@@ -1,3 +1,7 @@
-# bare-bones template
+# Little tag api
 
-This is a barebones repository. Please contact the instructor on how to proceed ahead. You should replace this page with more instructions once you've finalised what to do. 
+Endpoints:
+
+1. /__test
+
+Response: {status: "success", message: "Hello World!"}
