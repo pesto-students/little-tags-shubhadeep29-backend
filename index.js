@@ -1,7 +1,7 @@
 const config = require('./src/config');
-const http = require('https');
 const app = require('./src/app');
 
-app.listen(config.port, () => {
+const server = app.listen(config.port, () => {
+  console.log(JSON.stringify(server.listeners()))
   console.log("Server running on port: " + config.port);
 });
