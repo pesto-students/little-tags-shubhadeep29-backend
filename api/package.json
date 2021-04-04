@@ -1,0 +1,44 @@
+{
+  "name": "restapi-with-auth-rbac-middleware",
+  "version": "1.0.0",
+  "description": "rest api with auth and role based access control middleware",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "mocha --timeout 10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nitinmadelyn/oslash-assignment.git"
+  },
+  "keywords": [
+    "rest-api",
+    "auth",
+    "rbac"
+  ],
+  "author": "nitin muchhadiya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nitinmadelyn/oslash-assignment/issues"
+  },
+  "homepage": "https://github.com/nitinmadelyn/oslash-assignment#readme",
+  "dependencies": {
+    "aws-serverless-express": "^3.4.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
+    "helmet": "^4.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.95.4",
+    "markup-js": "^1.5.21",
+    "mysql-await": "^2.1.8",
+    "nodemon": "^2.0.7",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^2.4.5"
+  }
+}
