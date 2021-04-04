@@ -2,9 +2,10 @@
 
 
 ### Admin url
-http://ec2-13-127-218-228.ap-south-1.compute.amazonaws.com/admin
+https://reverent-villani-c8491d.netlify.app
 
 
 ### Rest api 
-End point: http://ec2-13-127-218-228.ap-south-1.compute.amazonaws.com:3000
+End point: https://mt6bjbo9yi.execute-api.ap-south-1.amazonaws.com/v1
+
 Postman Collection: https://www.getpostman.com/collections/fd4f95b9d8225819089f
