@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.5/examples/dashboard/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Nitin Muchhadiya">
+    <meta name="generator" content="After Smoke">
+    <title>KLOTHS - Users</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="./assets/bootstrap.min.css" rel="stylesheet" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://itsjavi.com/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css?v=1575468400921" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" href="./assets/images/favicon.ico" sizes="32x32">
+    <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#563d7c">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="./assets/dashboard.css" rel="stylesheet">
+  <style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+  <body>
+    <div id="commonHeader"></div>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="sidebar-sticky pt-3">
+        <ul class="nav flex-column" id="userRoleMenu">
+          
+        </ul>
+
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <h1 class="h2">Products</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#addUser" onclick="listCategory(); $('.modal-title').html('Add Product'); $('#submitAddUser').text('Add'); $('#productId').val('');">Add Product</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-striped table-sm" id="userTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="6">Loading....</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="addUser">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add Product</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form action="javascript: void(0);" onsubmit="return add();">
+          <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" class="form-control" required onchange="getSubCategory(this.value)">
+              <option>Select Category</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="subcategory">Sub Category:</label>
+            <select id="subcategory" class="form-control" required>
+              <option>Select SubCategory</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" placeholder="Product name" id="name" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" class="form-control" placeholder="Enter description" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" class="form-control" placeholder="Price" id="price" required>
+          </div>
+          <div class="form-group">
+            <label for="brand">Brand:</label>
+            <input type="text" class="form-control" placeholder="Brand name" id="brand">
+          </div>
+          <div class="form-group">
+            <label for="maxQuantity">Maximum Quantity:</label>
+            <input type="text" class="form-control" placeholder="Max Quantity" id="maxQuantity">
+          </div>
+          <div class="form-group">
+            <label for="size">Size:</label>
+            <input type="text" class="form-control" placeholder="Size" id="size">
+          </div>
+          <div class="form-group">
+            <label for="color">Color:</label>
+            <input id="color" type="text" class="form-control input-lg" value=""/>
+          </div>
+          <input type="hidden" id="productId" value="">
+          <button type="submit" id="submitAddProduct" class="btn btn-primary">Add</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="./assets/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="./assets/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script src="https://itsjavi.com/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js?v=1575468400921"></script>
+<script src="./assets/common.js"></script>
+<script src="./js/products.js"></script>
+<script> 
+  $(function(){
+    loadPageFunction();
+    load();
+    let allColors = [];
+    $('#color').colorpicker()
+    .on('colorpickerUpdate', function(e){
+      allColors.push(e.value);
+      if(allColors.length >= 10){
+        alert("Max 10 colors allowed")
+        return false;
+      } else {
+        $("#color").val(allColors.join(","))
+      }
+    });
+  });
+</script>
+</body></html>
