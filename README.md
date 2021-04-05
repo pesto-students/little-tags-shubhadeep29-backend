@@ -1,7 +1,11 @@
-# Little tag api
+# Little tag admin + api
 
-Endpoints:
 
-1. /__test
+### Admin url
+https://reverent-villani-c8491d.netlify.app
 
-Response: {status: "success", message: "Hello World!"}
+
+### Rest api 
+End point: https://mt6bjbo9yi.execute-api.ap-south-1.amazonaws.com/v1
+
+Postman Collection: https://www.getpostman.com/collections/fd4f95b9d8225819089f
