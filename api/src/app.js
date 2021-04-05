@@ -7,6 +7,14 @@ const helmet = require('helmet');
 app.use(helmet());
 const errorHandler = require('./helper/error-handler');
 
+var fileUpload = require('express-fileupload');
+app.use(fileUpload({
+  limits: { fileSize: 5 * 1024 * 1024 }, //5 MB maxSize
+  limitHandler: function(req, res, next){
+    return res.status(500).json({status: "error", message: "Image size should be less than equal to 5MB."});
+  }
+}));
+
 app.use(function(req, res, next){
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');

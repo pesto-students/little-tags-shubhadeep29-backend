@@ -18,7 +18,7 @@ function load(){
                     <td>'+element.name+'</td>\
                     <td>'+element.price+'</td>\
                     <td>'+element.status+'</td>\
-                    <td><a href="javascript: void(0);" data-toggle="modal" data-target="#addUser" onclick="selectUser(`'+element.id+'`)">Edit</a> <a href="javascript: void(0);" onclick="if(confirm(\'Are you sure?\')){deleteUser(`'+element.id+'`)} ">Delete</a></td>\
+                    <td><a href="javascript: void(0);" data-toggle="modal" data-target="#addUser" onclick="selectUser(`'+element.id+'`)">Edit</a> <a href="javascript: void(0);" onclick="if(confirm(\'Are you sure?\')){remove(`'+element.id+'`)} ">Delete</a></td>\
                   </tr>';
           $("#userTable tbody").html(html)
         });
@@ -28,6 +28,45 @@ function load(){
                 </tr>';
         $("#userTable tbody").html(html)
       }
+    } else {
+      alert(response.message);
+    }
+  });
+}
+
+function uploadImage(image) {
+  let form = new FormData();
+  form.append("product", image.files[0], image.files[0].name);
+
+  const settings = {
+    "url": apiUrl+"product/images",
+    "method": "PUT",
+    "timeout": 0,
+    "headers": {
+      "Authorization": "Bearer "+getCookie('token')
+    },
+    "processData": false,
+    "mimeType": "multipart/form-data",
+    "contentType": false,
+    "data": form
+  };
+
+  $.ajax(settings).done(function (response) {
+    //setTimeout(() => {
+    //  alert(JSON.parse(response).status)
+    //}, 500);
+    response = JSON.parse(response);
+    if(response.status == "success"){
+      const images = $("#images").val();
+      let imageSplit = [];
+      imageSplit = images.split("##");
+      imageSplit.push(response.url);
+      $("#images").val(imageSplit.join("##"));
+
+      const input = $("#productImages");
+      input.replaceWith(input.val('').clone(true));
+
+      $("#productImagesDiv").append('<img src="'+response.url+'" height="100" width="100" />')
     } else {
       alert(response.message);
     }
@@ -114,6 +153,7 @@ function add(){
     "name":$("#name").val(),
     "description":$("#description").val(),
     "price":$("#price").val(),
+    "images":$("#images").val(),
     "attributes": JSON.stringify({
       brand: $("#brand").val(),
       maxQuantity: $("#maxQuantity").val(),
@@ -138,7 +178,7 @@ function add(){
   
   $.ajax(settings).done(function (response) {
     if(response.status == "success"){
-      $(".modal-title button").click();
+      $('#addUser').modal('toggle');
       load();
       return false;
     } else {
@@ -147,21 +187,20 @@ function add(){
   });
 }
 
-function deleteUser(id){
+function remove(id){
   var settings = {
-    "url": apiUrl+"user/admin/"+id,
+    "url": apiUrl+"product/"+id,
     "method": "DELETE",
     "timeout": 0,
     "headers": {
       "Authorization": "Bearer "+getCookie('token'),
       "Content-Type": "application/json"
-    },
-    "data": JSON.stringify({"id": id}),
+    }
   };
 
   $.ajax(settings).done(function (response) {
     if(response.status == "success"){
-      loadUsers();
+      load();
     } else {
       alert(response.message);
     }

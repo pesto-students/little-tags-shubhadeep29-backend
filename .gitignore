@@ -107,3 +107,6 @@ dist
 #mac store file
 .DS_Store
 */.DS_Store
+
+#aws lambda function zip file
+lambda.zip

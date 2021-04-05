@@ -33,7 +33,10 @@ function checkCookie() {
 }
 
 function getApiPath(){
-  return "http://localhost:3000/"
+  if(location.hostname === 'localhost'){
+    return "http://localhost:3000/"  
+  }
+  return "https://mt6bjbo9yi.execute-api.ap-south-1.amazonaws.com/v1/"
 }
 
 function leftMenuActive(){
