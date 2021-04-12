@@ -1,8 +1,12 @@
-const tableName = "users";
+const tableName = "wishlists";
 const mysql = require('../config/database');
 
 module.exports.search = async function(params){
-  return mysql(tableName).where(params).select();
+  return mysql(tableName).where(params).select("productId").orderBy('createdAt');
+}
+
+module.exports.searchLike = async function(params){
+  return mysql(tableName).where(params.column, params.operator, params.value).select("id","name").orderBy('createdAt');
 }
 
 module.exports.create = async function(params){
@@ -15,8 +19,4 @@ module.exports.update = async function(params){
 
 module.exports.delete = async function(params){
   return mysql(tableName).where(params.where).update(params.data)
-}
-
-module.exports.searchLike = async function(params){
-  return mysql(tableName).where(params.column, params.operator, params.value).select("id","firstName","lastName","email").orderBy('createdAt');
 }

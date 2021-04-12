@@ -40,7 +40,7 @@ function uploadImage(image) {
 
   const settings = {
     "url": apiUrl+"product/images",
-    "method": "PUT",
+    "method": "POST",
     "timeout": 0,
     "headers": {
       "Authorization": "Bearer "+getCookie('token')
@@ -193,8 +193,7 @@ function remove(id){
     "method": "DELETE",
     "timeout": 0,
     "headers": {
-      "Authorization": "Bearer "+getCookie('token'),
-      "Content-Type": "application/json"
+      "Authorization": "Bearer "+getCookie('token')
     }
   };
 

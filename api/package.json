@@ -36,6 +36,7 @@
     "markup-js": "^1.5.21",
     "mysql-await": "^2.1.8",
     "nodemon": "^2.0.7",
+    "razorpay": "^2.0.6",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

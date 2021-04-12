@@ -7,6 +7,7 @@ const authorize = require('../middleware/auth');
 const Role = require('../middleware/roles');
 const AWS = require('aws-sdk');
 const S3 = new AWS.S3({region: config.region});
+const fs = require('fs');
 
 router.put('/', authorize([Role.Admin]), async function (req, res, next) {
   let params = req.body;
@@ -57,25 +58,28 @@ router.delete('/:id', authorize([Role.Admin]), async function (req, res, next) {
   return res.status(200).json({status:"success", message: "Product deleted successfully."});
 });
 
-router.put('/images', authorize([Role.Admin]), async function (req, res, next) {
+router.post('/images', authorize([Role.Admin]), async function (req, res, next) {
   const productImage = req.files.product;
-
+  console.log("image array...", productImage)
   if(productImage.mimetype !== 'image/jpeg' && productImage.mimetype !== 'image/png' & productImage.mimetype !== 'image/webp'){
     return res.status(400).json({status:"error", message: "Only jpeg/png/webp files allowed."});
   }
 
-  var S3Key = "products/"+productImage.name;
+  const timestamp = new Date().getTime();
+
+  var S3Key = "products/"+timestamp+"_"+productImage.name;
   var FileURL = config.CloudFront+S3Key;
-  S3.putObject({
+  S3.upload({
     Body: productImage.data,
     Key: S3Key,
     ContentType: productImage.mimetype,
     Bucket: config.S3Bucket
   }, function(err, data) { 
     if(err){
+      console.log(err);
       return res.status(400).json({status:"error", message: err});  
     }
-    return res.status(201).json({status:"success", url: FileURL});
+    return res.status(200).json({status:"success", url: FileURL});
   })
 });
 

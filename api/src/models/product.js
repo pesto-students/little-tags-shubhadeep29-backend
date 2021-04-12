@@ -15,7 +15,12 @@ module.exports.suggestions = async function(params){
 }
 
 module.exports.searchLike = async function(params){
+  console.log(mysql(tableName).where(params.column, params.operator, params.value).select("id","name").orderBy('createdAt').toSQL())
   return mysql(tableName).where(params.column, params.operator, params.value).select("id","name").orderBy('createdAt');
+}
+
+module.exports.searchByIds = async function(params){
+  return mysql(tableName).where(params.column, params.operator, params.value).select("id","name","price","images").orderBy('createdAt');
 }
 
 module.exports.commonSearch = async function(params){
@@ -55,6 +60,18 @@ module.exports.commonSearch = async function(params){
           }
         }
 
+        if(filterBy.key === 'categoryId'){
+          if(filterBy.value){
+            this.where('categoryId', filterBy.value)
+          }
+        }
+
+        if(filterBy.key === 'subcategoryId'){
+          if(filterBy.value){
+            this.where('subcategoryId', filterBy.value)
+          }
+        }
+
         if(filterBy.key === 'price'){
           if(filterBy.value.length > 0){
             if(filterBy.value[0]){
@@ -70,7 +87,7 @@ module.exports.commonSearch = async function(params){
       });
     }
   })
-  .select("name","price","images", "description","attributes","discount").orderBy('createdAt', "desc");
+  .select("id","name","price","images", "description","attributes","discount").orderBy('createdAt', "desc");
 }
 
 module.exports.search = async function(params){

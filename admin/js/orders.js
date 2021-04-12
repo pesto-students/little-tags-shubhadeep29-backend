@@ -1,10 +1,10 @@
 function loadOrders(){
   var settings = {
-    "url": apiUrl+"order/list",
-    "method": "POST",
+    "url": apiUrl+"order/admin/list",
+    "method": "GET",
     "timeout": 0,
     "headers": {
-      "Authorization": getCookie('token'),
+      "Authorization": "Bearer "+getCookie('token'),
       "Content-Type": "application/json"
     }
   };
@@ -14,13 +14,18 @@ function loadOrders(){
       var html = "";
       if(response.items.length > 0){
         response.items.forEach((element, i) => {
+          //let attrDetails = [];
+          //alert(Object.keys(element.attributes))
+          //for(const att of Object.values(element.attributes)){
+            
+          //}
           html += '<tr>\
                     <td>'+(i+1)+'</td>\
-                    <td>'+element.paanShopName+'</td>\
-                    <td>'+element.userName+'</td>\
+                    <td>'+element.user.firstName+" "+element.user.lastName+'</td>\
+                    <td>'+element.product.name+'<br/>₹ '+element.price+'<br/>'+element.attributes+'</td>\
                     <td>'+element.status+'</td>\
-                    <td><a href="javascript: void(0);" data-toggle="modal" data-target="#viewOrder" onclick="selectOrder('+element.id+',`view`)">Details</a> <a href="javascript: void(0);" data-toggle="modal" data-target="#addUser" onclick="selectOrder('+element.id+')">Edit</a> <a href="javascript: void(0);" onclick="if(confirm(\'Are you sure?\')){deleteOrder('+element.id+')} ">Delete</a></td>\
                   </tr>';
+                  //<td><a href="javascript: void(0);" data-toggle="modal" data-target="#viewOrder" onclick="selectOrder('+element.id+',`view`)">Details</a> <a href="javascript: void(0);" data-toggle="modal" data-target="#addUser" onclick="selectOrder('+element.id+')">Edit</a> <a href="javascript: void(0);" onclick="if(confirm(\'Are you sure?\')){deleteOrder('+element.id+')} ">Delete</a></td>\
           $("#userTable tbody").html(html)
         });
       } else {

@@ -9,9 +9,9 @@ const errorHandler = require('./helper/error-handler');
 
 var fileUpload = require('express-fileupload');
 app.use(fileUpload({
-  limits: { fileSize: 5 * 1024 * 1024 }, //5 MB maxSize
+  limits: { fileSize: 10 * 1024 * 1024 }, //5 MB maxSize
   limitHandler: function(req, res, next){
-    return res.status(500).json({status: "error", message: "Image size should be less than equal to 5MB."});
+    return res.status(500).json({status: "error", message: "Image size should be less than equal to 10MB."});
   }
 }));
 
@@ -39,6 +39,12 @@ app.use('/subcategory', subcategories);
 
 const products = require('./routes/products');
 app.use('/product', products);
+
+const wishlists = require('./routes/wishlists');
+app.use('/wishlist', wishlists);
+
+const orders = require('./routes/orders');
+app.use('/order', orders);
 
 app.use(errorHandler);
 

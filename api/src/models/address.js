@@ -1,4 +1,4 @@
-const tableName = "users";
+const tableName = "addresses";
 const mysql = require('../config/database');
 
 module.exports.search = async function(params){
@@ -15,8 +15,4 @@ module.exports.update = async function(params){
 
 module.exports.delete = async function(params){
   return mysql(tableName).where(params.where).update(params.data)
-}
-
-module.exports.searchLike = async function(params){
-  return mysql(tableName).where(params.column, params.operator, params.value).select("id","firstName","lastName","email").orderBy('createdAt');
 }

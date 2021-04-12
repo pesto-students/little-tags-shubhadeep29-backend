@@ -17,7 +17,9 @@ if(stage === 'dev'){
         password: "root",
         database: "kloths",
         port: 8889
-    }
+    },
+    razorpayKeyId: "rzp_test_RKfmGlASEU3goE",
+    razorpayKeySecret: "PNjw7xmYu9yGvRUEQ4cxcNYp"
   }
 } else {
   module.exports = {
@@ -34,6 +36,8 @@ if(stage === 'dev'){
         password: "jerrypassword",
         database: "kloths",
         port: 3306
-    }
+    },
+    razorpayKeyId: "rzp_test_RKfmGlASEU3goE",
+    razorpayKeySecret: "PNjw7xmYu9yGvRUEQ4cxcNYp"
   }
 }
